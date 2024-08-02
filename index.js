@@ -9,7 +9,8 @@ const token = process.env.SMSWHATSAPP_TOKEN;
 // Función para obtener chats pendientes
 async function getChats() {
     try {
-        const response = await axios.get(`${apiUrl}/chat/getChats?number=${token}&limit=10&onlyunread=true&lite=true`);
+        const response = await axios.get(`${apiUrl}/chat/getChats?number=${token}` +
+            `&limit=10&onlyunread=true&lite=true`);
         return response.data?.status === 'success' ? response.data.message : null;
     } catch (error) {
         console.error('Error al obtener los chats:', error);
