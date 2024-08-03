@@ -61,11 +61,10 @@ async function main() {
     while (true) {
         const chats = await getChats();
         if (chats) {
-            // Filtrando los chats que no son grupos y los números de teléfono específicos
+            // Filtrando los chats que no son grupos
             const filteredPhones = chats
-                .map(chat => chat.id)
-                .filter(phone => !phone.isGroup && 
-                                 (phone.startsWith('593984958499') || phone.startsWith('593980462125')));
+                .filter(phone => !phone.isGroup)
+                .map(chat => chat.id);
             
             for (const phone of filteredPhones) {
                 await markChatAsRead(phone);
