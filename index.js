@@ -60,6 +60,8 @@ async function generateLLMResponse(phone) {
 
 // Función para enviar un mensaje
 async function sendMessage(phone, message) {
+    if (!message) return;
+  
     // reemplazar ** por * para evitar problemas con el formato de negrita
     const msg = message.trim().replace(/\*\*/g, '*');
     const msgBody = { message: msg };
@@ -87,7 +89,7 @@ async function main() {
 
                 const iaResponse = await generateLLMResponse(phone);
 
-                if (iaResponse && iaResponse.status === 'success') {
+                if (iaResponse && iaResponse.status === 'success' && iaResponse.message) {
                     // Enviar mensaje al usuario generado por la inteligencia artificial
                     await sendMessage(phone, iaResponse.message);
                 }
